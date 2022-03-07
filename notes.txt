@@ -1,0 +1,162 @@
+- import useFormik
+
+in function component:
+
+// pass useFormik inital values and an submit function
+    const formik = useFormik({
+        initialValues:{
+            email:'',
+            firstName:'',
+            lastName:'',
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null,2));
+        }
+    })
+
+       return (
+     <form onSubmit={formik.handleSubmit}>
+       <label htmlFor="email">Email Address</label>
+        <input
+         id="firstName"
+         name="firstName"
+         type="text"
+         onChange={formik.handleChange}
+         value={formik.values.firstName}
+       />
+ 
+       <label htmlFor="lastName">Last Name</label>
+       <input
+         id="lastName"
+         name="lastName"
+         type="text"
+         onChange={formik.handleChange}
+         value={formik.values.lastName}
+       />
+       <input
+         id="email"
+         name="email"
+         type="email"
+         onChange={formik.handleChange}
+         value={formik.values.email}
+       />
+ 
+       <button type="submit">Submit</button>
+     </form>
+   );
+
+   After passing inital values and onSubmit function, formik sends back form state and helper methods in var called 'formik'
+    some:
+        - handleSubmit: submit handler
+        - handleChange: change handler for input select and textarea
+        - values: forms current values
+* have to add inital values for ALL fields
+
+ - same 'handle change' for all inputs,
+ - id and name that matches prop in initialValues
+ - access fiels value using formik.values    
+
+
+ *under the hood handleChange does:
+event => {
+    setValues(prevValues => ({
+        ...prevValues,
+        [event.target.name]: event.target.value
+    }))
+
+
+VALIDATION:
+1. custom validation function - must return object ith keys symetrical to our value/initvalues
+const validate = values => {
+    const errors = {};
+
+    if(!values.firstName){
+        errors.firstname = 'Required';
+    }else if (values.firstname.length > 15){
+        errors.firstname = 'Must be 15 charicters or less';
+    }
+
+    if(!values.lastName){
+        errors.lastname = 'Required';
+    }else if (values.lastname.length > 20){
+        errors.lastname = 'Must be 15 charicters or less';
+    }
+
+    if (!values.email) {
+     errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+     errors.email = 'Invalid email address';
+    }
+    return errors
+}
+
+no const formik = useFormik({
+    initialValues:{...
+    },
+    validate,
+    onSubmit: values => {
+        ...
+    }
+})
+
+in the form:
+       <label htmlFor="lastName">Last Name</label>
+       <input
+         id="lastName"
+         name="lastName"
+         type="text"
+         onChange={formik.handleChange}
+         value={formik.values.lastName}
+       />
+       {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
+ 
+
+---------------------------------
+Visited fields:
+only show error emssages to users on fields that they have visited:
+*** - formik keeps records of errors, values and which fields have been tracked *** 
+stored in a touched field - same - mirror values - keys are field numbers values are true and false
+
+just add: onBlur={formik.handleBlur}
+now tracking 'touched' so can do
+
+{formik.touched.firstName && formik.errors.firstName ?(
+    <div>{formik.errors.firstName}</div>
+) : null}
+
+
+----------------------------------------
+
+can use yup for validation as well
+
+----------------
+
+
+
+
+reducing boilderplate:
+getFiedlsProps()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+

@@ -1,25 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import FeedbackForm from './Form';
+const App = () => {
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <FeedbackForm title={"Form Title"} description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex at efficitur mollis. Nunc gravida pretium nunc, vel fringilla felis sagittis lacinia. Nam bibendum, sem id hendrerit posuere, mauris justo cursus urna, ut egestas nunc nisl quis purus."}/>
+    </>
   );
-}
+};
+
 
 export default App;
