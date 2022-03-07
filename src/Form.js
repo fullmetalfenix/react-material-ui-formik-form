@@ -47,11 +47,14 @@ const FeedbackForm = (props) => {
       autoComplete="off"
     >
       <form onSubmit={formik.handleSubmit} id="whole-form">
-        <h1>{props.title}</h1>
-        <p>{props.description}</p>
+        <Card sx={{pt:2, borderTop: "5px solid #002677"}}>
+          <h1>{props.title}</h1>
+          <p>{props.description}</p>
+        </Card>
 
         {/** "Full Name" **/}
-
+<Card style={{padding: 20, marginTop: 20,}}>
+  <h2>Dashboard</h2>
         <TextField
           required
           id="fullName"
@@ -63,6 +66,24 @@ const FeedbackForm = (props) => {
         {formik.touched.fullName && formik.errors.fullName ? (
           <div className="error" ><ArrowUpwardIcon />{formik.errors.fullName}</div>
         ) : null}
+
+
+
+        {/** "What do you like?" **/}
+
+        <TextField
+          id="like"
+          label="What do you like?"
+          multiline
+          required
+          rows={8}
+          {...formik.getFieldProps("like")}
+        />
+        {formik.touched.like && formik.errors.like ? (
+          <div className="error"><ArrowUpwardIcon />{formik.errors.like}</div>
+        ) : null}
+
+</Card>
 
 
         {/** "Rating" **/}
@@ -82,18 +103,6 @@ const FeedbackForm = (props) => {
         </div>
 
 
-        {/** "What do you like?" **/}
-
-        <TextField
-          id="like"
-          label="What do you like?"
-          multiline
-          rows={8}
-          {...formik.getFieldProps("like")}
-        />
-        {formik.touched.like && formik.errors.like ? (
-          <div className="error"><ArrowUpwardIcon />{formik.errors.like}</div>
-        ) : null}
 
         {/** "What don't you like?" **/}
 
