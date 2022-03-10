@@ -1,5 +1,5 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
@@ -9,13 +9,10 @@ import Rating from "@mui/material/Rating";
 import Card from "@mui/material/Card";
 
 const FeedbackForm = (props) => {
-  const [rating, setRating] = React.useState(2);
+  //const [rating, setRating] = React.useState(2);
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
     },
     validationSchema: Yup.object({
       fullName: Yup.string()
@@ -36,14 +33,6 @@ const FeedbackForm = (props) => {
     },
   });
   return (
-    <Box
-      component="form"
-      //   sx={{
-      //     "& .MuiTextField-root": { m: 1, width: "25ch" },
-      //   }}
-      noValidate
-      autoComplete="off"
-    >
       <form onSubmit={formik.handleSubmit} id="whole-form">
         <Card sx={{ pt: 2, borderTop: "5px solid #002677" }}>
           <h1>{props.title}</h1>
@@ -76,14 +65,11 @@ const FeedbackForm = (props) => {
             <p>How would you rate your experience?</p>
             <Rating
               name="simple-controlled"
-              id="rating"
+              id="starrating"
               size="large"
-              value={rating}
+              //value={rating}
               label="rating"
-              {...formik.getFieldProps("rating")}
-              onChange={(event, newValue) => {
-                setRating(newValue);
-              }}
+              {...formik.getFieldProps("starrating")}
             />
           </div>
         </Card>
@@ -154,7 +140,6 @@ const FeedbackForm = (props) => {
           Submit
         </Button>
       </form>
-    </Box>
   );
 };
 
