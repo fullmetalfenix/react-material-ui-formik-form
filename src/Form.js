@@ -15,6 +15,7 @@ import InputMask from "react-input-mask";
 import Rating from "@mui/material/Rating";
 import Card from "@mui/material/Card";
 import { ClassNames } from "@emotion/react";
+import { Container } from "@mui/material";
 
 const FeedbackForm = (props) => {
   //const [rating, setRating] = React.useState(2);
@@ -80,6 +81,7 @@ const FeedbackForm = (props) => {
         </p>
 
         {/** "Full Name" **/}
+          <Container style={{marginTop: 40, display: 'flex', flexDirection: 'column'}}>
         <TextField
           required
           id="fullName"
@@ -114,9 +116,11 @@ const FeedbackForm = (props) => {
       </InputMask>
  */}
 
-        <Button type="submit" variant="contained">
+        <Button style={{padding: 20}} type="submit" variant="contained">
           Submit
         </Button>
+
+        </Container>
       </form>
     </Box>
   );
