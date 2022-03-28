@@ -22,66 +22,35 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" type="text/css" href="../src/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <title>Feedback Form</title>
   <style>
-    body{
-      background:#0026771f;
-      font-family: sans-serif;
-    }
-    button[type="submit"]{
-      background: #002677;
-      color: white;
-      margin-top: 10px;
-      padding: 20px;
-    }
-    #whole-form {
-      display: flex;
-      flex-direction: column;
-      width: 600px;
-      margin: 100px auto;
-    }
-
-    .MuiFormControl-root {
-      width: 100% !important;
-      margin: 15px 0px !important;
-      background: white;
-      color: rgba(0,0,0,.87);
+    body {
+      margin: 0px;
+      font-family: Roboto;
     }
     h1{
-      margin: 0px;
-      text-align: center;
+      font-family: 'Orbitron', sans-serif;;
     }
-    p{
-      margin: 20px 20px 40px;
-    }
-    .error{
-      background: #ff000012;
-    padding: 20px;
-    display: flex;
-    font-family: sans-serif;
-    border: 3px solid red;
-    border-radius: 5px;
-    align-items: end;
-}
-.inputbox{
-  background: white;
-    /*border: 1px solid rgba(0,0,0,.3);*/
-    border-radius: 3px;
-    /*border-top: 5px solid #002677;*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0px;
-}
-.inputbox p{
-  margin: 0px 0px 10px
-}
-
-}
+    #content-container {
+      padding: 0px !important;
+      display: flex;
     }
 
+    .formbox-half {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    #whole-form {
+      padding: 40px;
+    }
   </style>
 </head>
 

@@ -3,23 +3,30 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import * as Yup from "yup";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+
+// Styles
+import styles from "./Form.module.css";
+
+import InputMask from "react-input-mask";
+
 import Rating from "@mui/material/Rating";
 import Card from "@mui/material/Card";
+import { ClassNames } from "@emotion/react";
 
 const FeedbackForm = (props) => {
   //const [rating, setRating] = React.useState(2);
 
   const formik = useFormik({
-    initialValues: {
-    },
+    initialValues: {},
     validationSchema: Yup.object({
       fullName: Yup.string()
         .max(15, "Must be 15 characters or less")
         .required("Required"),
-      like: Yup.string()
-        .max(20, "Must be 20 characters or less")
+      social: Yup.string()
+        .max(1, "This is a fake form, Please dont enter your social.")
         .required("Required"),
       dislike: Yup.string()
         .max(20, "Must be 20 characters or less")
@@ -33,113 +40,85 @@ const FeedbackForm = (props) => {
     },
   });
   return (
+    <Box
+      sx={{
+        background: "#0a1929",
+        minHeight: "100vh",
+        color: "rgba(250,250,250,.87)",
+      }}
+    >
       <form onSubmit={formik.handleSubmit} id="whole-form">
-        <Card sx={{ pt: 2, borderTop: "5px solid #002677" }}>
-          <h1>{props.title}</h1>
-          <p>{props.description}</p>
-        </Card>
+        <h1 style={{ fontSize: 52, margin: "0px auto 20px", maxWidth: 600 }}>
+          {props.title}
+          <svg
+            style={{
+              width: 50,
+              marginLeft: 15,
+              position: "absolute",
+              marginTop: 10,
+            }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              stroke="green"
+              stroke-width="3px"
+              fill="white"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zm-141.651-35.33c4.937-32.999-20.191-50.739-54.55-62.573l11.146-44.702-27.213-6.781-10.851 43.524c-7.154-1.783-14.502-3.464-21.803-5.13l10.929-43.81-27.198-6.781-11.153 44.686c-5.922-1.349-11.735-2.682-17.377-4.084l.031-.14-37.53-9.37-7.239 29.062s20.191 4.627 19.765 4.913c11.022 2.751 13.014 10.044 12.68 15.825l-12.696 50.925c.76.194 1.744.473 2.829.907-.907-.225-1.876-.473-2.876-.713l-17.796 71.338c-1.349 3.348-4.767 8.37-12.471 6.464.271.395-19.78-4.937-19.78-4.937l-13.51 31.147 35.414 8.827c6.588 1.651 13.045 3.379 19.4 5.006l-11.262 45.213 27.182 6.781 11.153-44.733a1038.209 1038.209 0 0 0 21.687 5.627l-11.115 44.523 27.213 6.781 11.262-45.128c46.404 8.781 81.299 5.239 95.986-36.727 11.836-33.79-.589-53.281-25.004-65.991 17.78-4.098 31.174-15.792 34.747-39.949zm-62.177 87.179c-8.41 33.79-65.308 15.523-83.755 10.943l14.944-59.899c18.446 4.603 77.6 13.717 68.811 48.956zm8.417-87.667c-7.673 30.736-55.031 15.12-70.393 11.292l13.548-54.327c15.363 3.828 64.836 10.973 56.845 43.035z"
+            />
+          </svg>
+        </h1>
+        <p
+          style={{
+            lineHeight: "1.75",
+            fontSize: 18,
+            maxWidth: 600,
+            margin: "0px auto",
+          }}
+        >
+          {props.description}
+        </p>
 
         {/** "Full Name" **/}
-        <Card
-          style={{ padding: 20, marginTop: 20, borderTop: "5px solid #002677" }}
-        >
-          <h2>Section One: General Impressions</h2>
-          <TextField
-            required
-            id="fullName"
-            type="text"
-            label="Name"
-            {...formik.getFieldProps("fullName")}
-          />
-          {/* Checks firstName input for youched and errors */}
-          {formik.touched.fullName && formik.errors.fullName ? (
-            <div className="error">
-              <ArrowUpwardIcon />
-              {formik.errors.fullName}
-            </div>
-          ) : null}
-
-          {/** "Rating" **/}
-
-          <div className="inputbox">
-            <p>How would you rate your experience?</p>
-            <Rating
-              name="simple-controlled"
-              id="starrating"
-              size="large"
-              //value={rating}
-              label="rating"
-              {...formik.getFieldProps("starrating")}
-            />
+        <TextField
+          required
+          id="fullName"
+          type="text"
+          label="Name"
+          variant="filled"
+          className={styles.inputBox}
+          {...formik.getFieldProps("fullName")}
+        />
+        {/* Checks firstName input for touched and errors */}
+        {formik.touched.fullName && formik.errors.fullName ? (
+          <div className="error">
+            <ArrowUpwardIcon />
+            {formik.errors.fullName}
           </div>
-        </Card>
+        ) : null}
+<p>Note: fake / parody website</p>
+        {/* <InputMask
+        mask="999-99-9999"
+        disabled={false}
+        maskChar=" "
+        {...formik.getFieldProps("social")}
+>
+        {() =>     <TextField
+    required
+    id="social"
+    label="social"
+    variant="filled"
+    className={styles.inputBox}
 
-        <Card
-          style={{ padding: 20, marginTop: 20, borderTop: "5px solid #002677" }}
-        >
-          <h2>Section Two: Specific Functionality</h2>
-          {/** "What do you like?" **/}
-
-          <TextField
-            id="like"
-            label="What do you like?"
-            multiline
-            required
-            rows={8}
-            {...formik.getFieldProps("like")}
-          />
-          {formik.touched.like && formik.errors.like ? (
-            <div className="error">
-              <ArrowUpwardIcon />
-              {formik.errors.like}
-            </div>
-          ) : null}
-
-          {/** "What don't you like?" **/}
-
-          <TextField
-            id="dislike"
-            label="What don't you like?"
-            multiline
-            rows={8}
-            {...formik.getFieldProps("dislike")}
-          />
-          {/* Checks firstName input for youched and errors */}
-          {formik.touched.dislike && formik.errors.dislike ? (
-            <div className="error">
-              <ArrowUpwardIcon />
-              {formik.errors.dislike}
-            </div>
-          ) : null}
-        </Card>
-
-        <Card
-          style={{ padding: 20, marginTop: 20, borderTop: "5px solid #002677" }}
-        >
-          <h2>Section Three: Parting Shots</h2>
-          {/** "Additional Comments" **/}
-
-          <TextField
-            id="additionalComments"
-            label="Additional comments."
-            multiline
-            rows={8}
-            {...formik.getFieldProps("additionalComments")}
-          />
-          {/* Checks firstName input for youched and errors */}
-          {formik.touched.additionalComments &&
-          formik.errors.additionalComments ? (
-            <div className="error">
-              <ArrowUpwardIcon />
-              {formik.errors.additionalComments}
-            </div>
-          ) : null}
-        </Card>
+/> }
+      </InputMask>
+ */}
 
         <Button type="submit" variant="contained">
           Submit
         </Button>
       </form>
+    </Box>
   );
 };
 
