@@ -24,15 +24,15 @@ const validationSchema = Yup.object({
   fullName: Yup.string()
     .max(15, "Must be 15 characters or less")
     .required("Required"),
-  social: Yup.string()
-    .max(1, "This is a fake form, Please dont enter your social. - just enter the number '1'")
-    .required("Required"),
-  dislike: Yup.string()
-    .max(20, "Must be 20 characters or less")
-    .required("dont like error"),
-  additionalComments: Yup.string()
-    .max(20, "Must be 20 characters or less")
-    .required("dont like error"),
+  // social: Yup.string()
+  //   .max(1, "This is a fake form, Please dont enter your social. - just enter the number '1'")
+  //   .required("Required"),
+  // dislike: Yup.string()
+  //   .max(20, "Must be 20 characters or less")
+  //   .required("dont like error"),
+  // additionalComments: Yup.string()
+  //   .max(20, "Must be 20 characters or less")
+  //   .required("dont like error"),
 });
 
 
@@ -101,7 +101,7 @@ const FeedbackForm = (props) => {
             variant="filled"
             value={formik.values.fullName}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}  
+            onBlur={formik.handleBlur}
             className={styles.inputBox}
           />
 
