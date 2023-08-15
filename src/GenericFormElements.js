@@ -22,8 +22,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
 import { RestoreFromTrash } from "@mui/icons-material";
 
 // example for select
@@ -49,7 +48,7 @@ const options = [
 
 const validationSchema = Yup.object({
   textField: Yup.string()
-    .max(15, "Must be 15 characters or less")
+    .max(25, "Must be 25 characters or less")
     .required("Required"),
   numberField: Yup.string()
     .max(9, "Required / Must Be 9 Digits")
@@ -65,19 +64,20 @@ const FeedbackForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      textField: "If you want an initial Value",
+      textField: "Initial Value? Sure!",
       numberField: "",
       multiline: "",
       selectBox: "",
       radioGroup: "",
-      checkBox:false
+      checkBox: false,
+      dateField: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values,  {setSubmitting, resetForm}) => {
+    onSubmit: (values, { setSubmitting, resetForm }) => {
       alert(JSON.stringify(values, null, 2));
-      resetForm()
-      setSubmitting(false)
-    //  formik.values.textField = "Hello World!"
+      resetForm();
+      setSubmitting(false);
+      //  formik.values.textField = "Hello World!"
     },
   });
   return (
@@ -90,7 +90,6 @@ const FeedbackForm = (props) => {
         name="textField"
         type="text"
         value={formik.values.textField}
-
         label="Text Input"
         variant="filled"
         {...formik.getFieldProps("textField")}
@@ -157,7 +156,7 @@ const FeedbackForm = (props) => {
         label="Select"
         helperText="Please select your option"
         id="selectBox"
-        label="selectBox"
+        label="Select Box"
         fullWidth
         placeholder="Select Field"
         style={{ marginTop: 40 }}
@@ -178,23 +177,36 @@ const FeedbackForm = (props) => {
         </div>
       ) : null}
 
-
-{/* 
+      {/* 
 Radio Group  */}
+      <br />
+      <br />
+      <br />
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <FormLabel id="demo-radio-buttons-group-label">Options Group</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           id="radioGroup"
           {...formik.getFieldProps("radioGroup")}
           name="radioGroup"
         >
-          <FormControlLabel value="Option 1" control={<Radio />} label="Option 1" />
-          <FormControlLabel value="Option 2" control={<Radio />} label="Option 2" />
-          <FormControlLabel value="Option 3" control={<Radio />} label="Option 3" />
+          <FormControlLabel
+            value="Option 1"
+            control={<Radio />}
+            label="Option 1"
+          />
+          <FormControlLabel
+            value="Option 2"
+            control={<Radio />}
+            label="Option 2"
+          />
+          <FormControlLabel
+            value="Option 3"
+            control={<Radio />}
+            label="Option 3"
+          />
         </RadioGroup>
       </FormControl>
-
 
       {formik.touched.radioGroup && formik.errors.radioGroup ? (
         <div className="error">
@@ -203,21 +215,41 @@ Radio Group  */}
         </div>
       ) : null}
 
-{/* 
+      {/* 
 Checkbox */}
-<br />
-<FormControlLabel
-          value="top"
-          control={<Checkbox />}
-          label="Top"
-          labelPlacement="top"
-          {...formik.getFieldProps("checkBox")}
-          
-        />
+      <br />
+      <br />
 
+      <FormControlLabel
+        value="top"
+        control={<Checkbox />}
+        label="Yes or No?"
+        //  labelPlacement="top"
+        {...formik.getFieldProps("checkBox")}
+      />
 
+      {formik.values.checkBox != "" ? (
+        <div style={{ padding: 20, background: "red" }}>Hi there!</div>
+      ) : (
+        ''
+      )}
 
+      {/* 
+date picker */}
 
+      <br />
+      <br />
+      <label for="dateField" style={{color: 'rgba(0, 0, 0, 0.6)'}}>Date Field:</label>
+      <TextField
+        fullWidth
+        placeholder="Date Field"
+        id="dateField"
+        name="dateField"
+        type="date"
+        value={formik.values.dateField}
+        variant="filled"
+        {...formik.getFieldProps("dateField")}
+      />
 
       <Button
         color="primary"
